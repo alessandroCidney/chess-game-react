@@ -4,6 +4,8 @@ import Piece from '../Piece';
 import { Board } from './styles';
 import { generateChess } from '../../utils/generateChess';
 
+import Pieces from './pieces';
+
 type PieceSelected = {
   type: string;
   position: number;
@@ -17,6 +19,20 @@ type Move = {
 export default function Chess () {
   const [chessArray, setChessArray] = useState(generateChess());
   const [move, setMove] = useState({} as Move);
+
+  const checkValidPositions = useCallback((n: number) => {
+    const piecesClass = new Pieces();
+
+    let currentChess = chessArray;
+    let validPositions = piecesClass.getRook().valid(n);
+
+    let newChess = currentChess.map(piece => ({
+      ...piece,
+      valid: validPositions.includes(piece.position)
+    }));
+
+    setChessArray(newChess);
+  }, [chessArray]);
 
   const execMove = useCallback(() => {
     function cleanChessSelectedPieces () {
@@ -64,13 +80,17 @@ export default function Chess () {
     setMove({
       lastSelected: newChess[pos - 1]
     });
+
+    if (!move.lastSelected && !move.newSelected) {
+      checkValidPositions(newChess[pos - 1].position);
+    };
   };
 
   useEffect(() => {
     if (move.lastSelected && move.newSelected) {
       execMove();
     };
-  }, [move, execMove]);
+  }, [move, execMove, checkValidPositions]);
 
   console.log('render!')
 
@@ -81,6 +101,7 @@ export default function Chess () {
                                   pieceType={piece.type}
                                   position={piece.position}
                                   selected={piece.selected}
+                                  valid={piece.valid}
                                   key={`chess-piece-${piece.type}-${piece.position}`}
                                   onClick={() => selectPiece(piece.position)}
                                 />)

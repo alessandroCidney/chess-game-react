@@ -5,6 +5,7 @@ type PieceProps = {
   pieceType?: string;
   position: number;
   selected?: boolean;
+  valid?: boolean;
   onClick: () => void;
 };
 
@@ -13,17 +14,18 @@ export default function Piece ({
   pieceType = 'empty',
   position,
   selected,
-  onClick
+  onClick,
+  valid
 }: PieceProps) {
   return (
     <StyledPieceSquare
       size={size}
       index={position}
       selected={selected}
+      valid={valid}
       onClick={onClick}
     >
-      {/*<i className={`fas fa-chess-${pieceType}`}></i>*/}
-      {pieceType}
+      <i className={`fas fa-chess-${pieceType}`}></i>
     </StyledPieceSquare>
   );
 };

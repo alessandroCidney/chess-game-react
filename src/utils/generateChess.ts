@@ -5,6 +5,7 @@ export type ChessArrayPiece = {
   type: string;
   position: number;
   selected?: boolean;
+  valid?: boolean;
 };
 
 export function generateChess (): ChessArrayPiece[] {

@@ -1,40 +1,45 @@
 import { findPosition } from "../../../utils/findPosition";
+import { findColumn } from "../../../utils/findColumn";
+import { findRow } from "../../../utils/findRow";
 
 export default class Rook {
-  valid (x: number, y: number) {
+  valid (position: number): number[] {
     let valids = [] as number[][];
 
-    let x2 = x;
-    let y2 = y;
+    const row = findRow(position);
+    const column = findColumn(position);
 
-    while (x2 !== 1) {
-        x2 -= 1;
+    let currentRow = row;
+    let currentColumn = column;
 
-        valids.push([x2, y2]);
+    while (currentRow !== 1) {
+        currentRow -= 1;
+
+        valids.push([currentRow, currentColumn]);
     };
 
-    x2 = x;
+    currentRow = row;
 
-    while (x2 !== 8) {
-        x2 += 1;
+    while (currentRow !== 8) {
+        currentRow += 1;
 
-        valids.push([x2, y2]);
+        valids.push([currentRow, currentColumn]);
     };
 
-    x2 = x;
+    currentRow = row;
 
-    while (y2 !== 1) {
-        y2 -= 1;
+    while (currentColumn !== 1) {
+        currentColumn -= 1;
 
-        valids.push([x2, y2]);
+        valids.push([currentRow, currentColumn]);
     };
 
-    y2 = y;
+    currentColumn = column;
 
-    while (y2 !== 8) {
-        y2 += 1;
+    while (currentColumn !== 8) {
+        currentColumn += 1;
 
-        valids.push([x2, y2]);
+        valids.push([currentRow, currentColumn]);
     };
 
     return valids.map((arr) => findPosition(arr[0], arr[1]));

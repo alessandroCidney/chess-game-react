@@ -3,8 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Piece from '../Piece';
 import { Board } from './styles';
 import { generateChess } from '../../utils/generateChess';
-
-import Pieces from './pieces';
+import { checkIfPositionIsInValidPositions } from '../../utils/findValidPositions';
 
 type PieceSelected = {
   type: string;
@@ -21,21 +20,21 @@ export default function Chess () {
   const [move, setMove] = useState({} as Move);
 
   const checkValidPositions = useCallback((n: number) => {
-    const piecesClass = new Pieces();
-
     let currentChess = chessArray;
-    let validPositions = piecesClass.getRook().valid(n);
 
     let newChess = currentChess.map(piece => ({
       ...piece,
-      valid: validPositions.includes(piece.position)
+      valid: checkIfPositionIsInValidPositions(
+        currentChess[n - 1].type,
+        currentChess[n - 1].position,
+        piece.position
+      )
     }));
 
     setChessArray(newChess);
   }, [chessArray]);
 
   const execMove = useCallback(() => {
-    const piecesClass = new Pieces();
 
     function cleanChessSelectedAndValidPieces () {
       let currentChess = chessArray;
@@ -56,10 +55,11 @@ export default function Chess () {
     if(
       move.lastSelected 
       && move.newSelected
-      && piecesClass
-          .getRook()
-          .valid(move.lastSelected.position)
-          .includes(move.newSelected.position)
+      && checkIfPositionIsInValidPositions(
+        move.lastSelected.type,
+        move.lastSelected.position,
+        move.newSelected.position
+      )
     ) {
       currentChess[move.newSelected.position - 1].type = move.lastSelected.type
       currentChess[move.lastSelected.position - 1].type = 'empty';

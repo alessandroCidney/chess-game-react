@@ -26,6 +26,9 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
 
   ${props => props.valid && `filter: brightness(0.7);`}
 
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #CECECE;
+
   &:hover {
     filter: brightness(1.2);
   }

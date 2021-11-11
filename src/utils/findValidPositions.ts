@@ -18,6 +18,9 @@ export function findValidPositions (type: string | undefined, position: number |
     case 'bishop':
       results = piecesClass.getBishop().valid(position);
       break;
+    case 'queen':
+      results = piecesClass.getQueen().valid(position);
+      break;
     default:
       results = [];
   };

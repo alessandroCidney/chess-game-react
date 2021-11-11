@@ -35,12 +35,15 @@ export default function Chess () {
   }, [chessArray]);
 
   const execMove = useCallback(() => {
-    function cleanChessSelectedPieces () {
+    const piecesClass = new Pieces();
+
+    function cleanChessSelectedAndValidPieces () {
       let currentChess = chessArray;
   
       let newChess = currentChess.map((piece) => ({
         ...piece,
-        selected: false
+        selected: false,
+        valid: false
       }));
   
       setChessArray(newChess);
@@ -50,18 +53,29 @@ export default function Chess () {
 
     // Validar aqui posteriormente
 
-    if(move.lastSelected && move.newSelected) {
+    if(
+      move.lastSelected 
+      && move.newSelected
+      && piecesClass
+          .getRook()
+          .valid(move.lastSelected.position)
+          .includes(move.newSelected.position)
+    ) {
       currentChess[move.newSelected.position - 1].type = move.lastSelected.type
       currentChess[move.lastSelected.position - 1].type = 'empty';
 
       let newChess = currentChess.map(obj => ({ ...obj }));
       setChessArray(newChess);
       setMove({});
-      cleanChessSelectedPieces();
+      cleanChessSelectedAndValidPieces();
     };
   }, [chessArray, move.lastSelected, move.newSelected]);
 
-  function selectPiece (pos: number) {
+  function selectPiece (pos: number, type: string) {
+    if (!move.lastSelected && type === 'empty') {
+      return;
+    };
+
     let currentChess = chessArray;
     currentChess[pos - 1].selected = true;
 
@@ -103,7 +117,7 @@ export default function Chess () {
                                   selected={piece.selected}
                                   valid={piece.valid}
                                   key={`chess-piece-${piece.type}-${piece.position}`}
-                                  onClick={() => selectPiece(piece.position)}
+                                  onClick={() => selectPiece(piece.position, piece.type)}
                                 />)
       }
     </Board>

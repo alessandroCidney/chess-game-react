@@ -24,7 +24,7 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
 
   ${props => props.selected && 'filter: brightness(1.5);'}
 
-  ${props => props.valid && `filter: brightness(0.5);`}
+  ${props => props.valid && `filter: brightness(0.7);`}
 
   &:hover {
     filter: brightness(1.2);

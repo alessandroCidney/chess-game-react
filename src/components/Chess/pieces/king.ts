@@ -4,7 +4,7 @@ import { findRow } from "../../../utils/findRow";
 import { cleanInvalidPieces } from "../../../utils/cleanInvalidPieces";
 
 export default class King {
-  valid (position: number) {
+  valid (position: number): number[] {
     let valids: number[][] = [];
 
     const row = findRow(position);

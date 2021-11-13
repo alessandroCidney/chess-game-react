@@ -3,6 +3,7 @@ import Knight from './knight'
 import Bishop from './bishop';
 import Queen from './queen';
 import King from './king';
+import Pawn from './pawn';
 
 export default class Pieces {
   getRook () {
@@ -23,5 +24,9 @@ export default class Pieces {
 
   getKing () {
     return new King();
+  };
+
+  getPawn () {
+    return new Pawn();
   };
 };

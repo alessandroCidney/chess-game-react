@@ -29,7 +29,8 @@ export default function Chess () {
       valid: checkIfPositionIsInValidPositions(
         currentChess[n - 1].type,
         currentChess[n - 1].position,
-        piece.position
+        piece.position,
+        currentChess[n - 1].pawnMode
       )
     }));
 
@@ -60,7 +61,8 @@ export default function Chess () {
       && checkIfPositionIsInValidPositions(
         move.lastSelected.type,
         move.lastSelected.position,
-        move.newSelected.position
+        move.newSelected.position,
+        move.lastSelected.pawnMode
       )
     ) {
       currentChess[move.newSelected.position - 1].type = move.lastSelected.type

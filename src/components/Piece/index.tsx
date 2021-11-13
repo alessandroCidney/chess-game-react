@@ -24,6 +24,7 @@ export default function Piece ({
       selected={selected}
       valid={valid}
       onClick={onClick}
+      pieceType={pieceType}
     >
       <i className={`fas fa-chess-${pieceType}`}></i>
     </StyledPieceSquare>

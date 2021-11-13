@@ -3,22 +3,22 @@ import { findColumn } from "../../../utils/findColumn";
 import { findRow } from "../../../utils/findRow";
 import { cleanInvalidPieces } from "../../../utils/cleanInvalidPieces";
 
-export default class Knight {
+export default class King {
   valid (position: number) {
-    let valids = [];
+    let valids: number[][] = [];
 
     const row = findRow(position);
     const column = findColumn(position);
 
     valids.push(
-      [row + 2, column + 1],
-      [row + 2, column - 1],
-      [row - 2, column + 1],
-      [row - 2, column - 1],
-      [row + 1, column + 2],
-      [row + 1, column - 2],
-      [row - 1, column + 2],
-      [row - 1, column - 2]
+      [row + 1, column],
+      [row - 1, column],
+      [row, column + 1],
+      [row, column - 1],
+      [row + 1, column + 1],
+      [row + 1, column - 1],
+      [row - 1, column + 1],
+      [row - 1, column - 1],
     );
 
     valids = cleanInvalidPieces(valids);

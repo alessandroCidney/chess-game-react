@@ -21,6 +21,9 @@ export function findValidPositions (type: string | undefined, position: number |
     case 'queen':
       results = piecesClass.getQueen().valid(position);
       break;
+    case 'king':
+      results = piecesClass.getKing().valid(position);
+      break;
     default:
       results = [];
   };

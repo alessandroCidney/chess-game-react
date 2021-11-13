@@ -7,6 +7,7 @@ interface StyledPieceSquareProps {
   index: number;
   selected?: boolean;
   valid?: boolean;
+  pieceType?: string;
 };
 
 export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
@@ -25,6 +26,8 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
   ${props => props.selected && 'filter: brightness(1.5);'}
 
   ${props => props.valid && `filter: brightness(0.7);`}
+
+  ${props => (!!props.pieceType && props.pieceType !== 'empty') && 'cursor: pointer;'}
 
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #CECECE;

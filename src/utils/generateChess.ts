@@ -8,7 +8,7 @@ export type ChessArrayPiece = {
   valid?: boolean;
 };
 
-export function generateChess (): ChessArrayPiece[] {
+export function generateChess (startWith: string = 'whitePieces'): ChessArrayPiece[] {
   function pawnPiece (chess: ChessArrayPiece[], position: number) {
     chess.push({
       type: 'pawn',

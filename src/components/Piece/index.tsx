@@ -7,6 +7,8 @@ type PieceProps = {
   selected?: boolean;
   valid?: boolean;
   onClick: () => void;
+  pieceColor?: string;
+  pawnMode?: string;
 };
 
 export default function Piece ({
@@ -15,7 +17,9 @@ export default function Piece ({
   position,
   selected,
   onClick,
-  valid
+  valid,
+  pieceColor,
+  pawnMode
 }: PieceProps) {
   return (
     <StyledPieceSquare
@@ -25,6 +29,7 @@ export default function Piece ({
       valid={valid}
       onClick={onClick}
       pieceType={pieceType}
+      pieceColor={pieceColor}
     >
       <i className={`fas fa-chess-${pieceType}`}></i>
     </StyledPieceSquare>

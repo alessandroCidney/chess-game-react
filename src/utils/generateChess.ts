@@ -6,22 +6,27 @@ export type ChessArrayPiece = {
   position: number;
   selected?: boolean;
   valid?: boolean;
+  pieceColor?: string;
+  pawnMode?: string;
 };
 
-export function generateChess (startWith: string = 'whitePieces'): ChessArrayPiece[] {
-  function pawnPiece (chess: ChessArrayPiece[], position: number) {
+export function generateChess (startsWith: string = 'whitePieces'): ChessArrayPiece[] {
+  function pawnPiece (chess: ChessArrayPiece[], position: number, pawnMode: string, pieceColor: string) {
     chess.push({
       type: 'pawn',
-      position: position
+      position: position,
+      pieceColor: pieceColor,
+      pawnMode: pawnMode
     });
   };
 
-  function otherPiece (chess: ChessArrayPiece[], column: number, position: number) {
+  function otherPiece (chess: ChessArrayPiece[], column: number, position: number, pieceColor: string) {
     let piecesRow = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
     
     chess.push({
       type: piecesRow[column - 1],
       position: position,
+      pieceColor: pieceColor
     });
   };
 
@@ -41,12 +46,16 @@ export function generateChess (startWith: string = 'whitePieces'): ChessArrayPie
 
     switch (row) {
       case 2:
+        pawnPiece(chess, i, 'from-top-to-bottom', (startsWith === 'whitePieces' ? 'black' : 'white'));
+        break;
       case 7:
-        pawnPiece(chess, i);
+        pawnPiece(chess, i, 'bottom-to-top', (startsWith === 'whitePieces' ? 'white' : 'black'));
         break;
       case 1:
+        otherPiece(chess, column, i, (startsWith === 'whitePieces' ? 'black' : 'white'));
+        break;
       case 8:
-        otherPiece(chess, column, i);
+        otherPiece(chess, column, i, (startsWith === 'whitePieces' ? 'white' : 'black'));
         break;
       default:
         emptySquare(chess, i);

@@ -8,6 +8,8 @@ import { checkIfPositionIsInValidPositions } from '../../utils/findValidPosition
 type PieceSelected = {
   type: string;
   position: number;
+  pieceColor?: string;
+  pawnMode?: string;
 };
 
 type Move = {
@@ -62,7 +64,12 @@ export default function Chess () {
       )
     ) {
       currentChess[move.newSelected.position - 1].type = move.lastSelected.type
+      currentChess[move.newSelected.position - 1].pieceColor = move.lastSelected.pieceColor
+      currentChess[move.newSelected.position - 1].pawnMode = move.lastSelected.pawnMode
+
       currentChess[move.lastSelected.position - 1].type = 'empty';
+      currentChess[move.lastSelected.position - 1].pieceColor = undefined;
+      currentChess[move.lastSelected.position - 1].pawnMode = undefined;
 
       let newChess = currentChess.map(obj => ({ ...obj }));
       setChessArray(newChess);
@@ -113,6 +120,8 @@ export default function Chess () {
       {
         chessArray.map(piece => <Piece
                                   pieceType={piece.type}
+                                  pieceColor={piece.pieceColor}
+                                  pawnMode={piece.pawnMode}
                                   position={piece.position}
                                   selected={piece.selected}
                                   valid={piece.valid}

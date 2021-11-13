@@ -8,6 +8,7 @@ interface StyledPieceSquareProps {
   selected?: boolean;
   valid?: boolean;
   pieceType?: string;
+  pieceColor?: string;
 };
 
 export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
@@ -23,14 +24,31 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
 
   font-size: 2.5rem;
 
+  ${props => props.pieceColor && `color: ${props.pieceColor};`}
+
   ${props => props.selected && 'filter: brightness(1.5);'}
 
   ${props => props.valid && `filter: brightness(0.7);`}
 
   ${props => (!!props.pieceType && props.pieceType !== 'empty') && 'cursor: pointer;'}
 
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #CECECE;
+  ${(props) => {
+    if (props.pieceColor) {
+      if (props.pieceColor === 'black') {
+        return `
+          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-color: #CECECE;
+        `;
+      } else if (props.pieceColor === 'white') {
+        return `
+          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-color: #000;
+        `;
+      } else {
+        return '';
+      }
+    }
+  }}
 
   &:hover {
     filter: brightness(1.2);

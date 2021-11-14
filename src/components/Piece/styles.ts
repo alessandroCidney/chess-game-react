@@ -22,7 +22,7 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
   background-color: ${props => squareColor(props.index)};
   border: 0;
 
-  font-size: 2.5rem;
+  font-size: 2.9rem;
 
   ${props => props.pieceColor && `color: ${props.pieceColor};`}
 
@@ -36,12 +36,12 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
     if (props.pieceColor) {
       if (props.pieceColor === 'black') {
         return `
-          -webkit-text-stroke-width: 1px;
-          -webkit-text-stroke-color: #CECECE;
+          -webkit-text-stroke-width: 2px;
+          -webkit-text-stroke-color: #DDD;
         `;
       } else if (props.pieceColor === 'white') {
         return `
-          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-width: 2px;
           -webkit-text-stroke-color: #000;
         `;
       } else {
@@ -52,5 +52,9 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
 
   &:hover {
     filter: brightness(1.2);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 6vw;
   }
 `;

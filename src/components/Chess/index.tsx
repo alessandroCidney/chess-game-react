@@ -134,6 +134,7 @@ export default function Chess () {
 
   return (
     <Board size={600}>
+      <div className="wrapper">
       {
         chessArray.map(piece => <Piece
                                   pieceType={piece.type}
@@ -146,6 +147,7 @@ export default function Chess () {
                                   onClick={() => selectPiece(piece.position, piece.type)}
                                 />)
       }
+      </div>
     </Board>
   );
 };

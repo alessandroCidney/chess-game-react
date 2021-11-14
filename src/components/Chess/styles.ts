@@ -5,13 +5,26 @@ interface BoardProps {
 };
 
 export const Board = styled.div<BoardProps>`
-  width: ${props => props.size ? `${props.size}px` : '300px'};
-  height: ${props => props.size ? `${props.size}px` : '300px'};
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
 
-  border: 1px solid #CECECE;
+  position: relative;
 
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  div {
+    position: absolute;
+
+    border: 1px solid #CECECE;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: ${props => props.size ? `${props.size}px` : '300px'};
+    max-height: ${props => props.size ? `${props.size}px` : '300px'};
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 `;

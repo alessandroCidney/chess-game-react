@@ -36,21 +36,21 @@ export default function Chess () {
 
     setChessArray(newChess);
   }, [chessArray]);
+  
+  const cleanChessSelectedAndValidPieces = useCallback(() => {
+    let currentChess = chessArray;
+
+    let newChess = currentChess.map((piece) => ({
+      ...piece,
+      selected: false,
+      valid: false
+    }));
+
+    setChessArray(newChess);
+  }, [chessArray]);
 
   const execMove = useCallback(() => {
 
-    function cleanChessSelectedAndValidPieces () {
-      let currentChess = chessArray;
-  
-      let newChess = currentChess.map((piece) => ({
-        ...piece,
-        selected: false,
-        valid: false
-      }));
-  
-      setChessArray(newChess);
-    };
-    
     let currentChess = chessArray;
 
     // Validar aqui posteriormente
@@ -78,7 +78,7 @@ export default function Chess () {
       setMove({});
       cleanChessSelectedAndValidPieces();
     };
-  }, [chessArray, move.lastSelected, move.newSelected]);
+  }, [chessArray, move.lastSelected, move.newSelected, cleanChessSelectedAndValidPieces]);
 
   function selectPiece (pos: number, type: string) {
     if (!move.lastSelected && type === 'empty') {
@@ -111,9 +111,22 @@ export default function Chess () {
 
   useEffect(() => {
     if (move.lastSelected && move.newSelected) {
+
+      if (move.lastSelected.position === move.newSelected.position) {
+        cleanChessSelectedAndValidPieces();
+        setMove({});
+        return;
+      };
+
+      if (move.lastSelected.pieceColor === move.newSelected.pieceColor) {
+        cleanChessSelectedAndValidPieces();
+        setMove({});
+        return;
+      };
+
       execMove();
     };
-  }, [move, execMove, checkValidPositions]);
+  }, [move, execMove, checkValidPositions, cleanChessSelectedAndValidPieces]);
 
   console.log('render!')
 

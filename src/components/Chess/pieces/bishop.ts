@@ -1,20 +1,30 @@
 import { findPosition } from "../../../utils/findPosition";
 import { findColumn } from "../../../utils/findColumn";
 import { findRow } from "../../../utils/findRow";
+import { ChessArrayPiece } from "../../../utils/generateChess";
 
 export default class Bishop {
-  valid (position: number): number[] {
+  valid (position: number, chessSnapshot: ChessArrayPiece[]): number[] {
     let valids = [];
 
     const row = findRow(position);
     const column = findColumn(position);
+    let currentPiece = chessSnapshot.find(piece => piece.position === position);
 
     let currentRow = row;
     let currentColumn = column;
+    let temporaryPiece: ChessArrayPiece | undefined;
 
     while (currentRow !== 1 && currentColumn !== 8) {
         currentRow -= 1;
         currentColumn += 1;
+
+        // eslint-disable-next-line no-loop-func
+        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
+        
+        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+          break;
+        };
 
         valids.push([currentRow, currentColumn]);
     };
@@ -26,6 +36,13 @@ export default class Bishop {
         currentRow += 1;
         currentColumn -= 1;
 
+        // eslint-disable-next-line no-loop-func
+        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
+        
+        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+          break;
+        };
+
         valids.push([currentRow, currentColumn]);
     };
 
@@ -36,6 +53,13 @@ export default class Bishop {
         currentRow += 1;
         currentColumn += 1;
 
+        // eslint-disable-next-line no-loop-func
+        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
+        
+        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+          break;
+        };
+
         valids.push([currentRow, currentColumn]);
     };
 
@@ -45,6 +69,13 @@ export default class Bishop {
     while (currentRow !== 1 && currentColumn !== 1) {
         currentRow -= 1;
         currentColumn -= 1;
+
+        // eslint-disable-next-line no-loop-func
+        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
+        
+        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+          break;
+        };
 
         valids.push([currentRow, currentColumn]);
     };

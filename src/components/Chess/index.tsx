@@ -30,7 +30,8 @@ export default function Chess () {
         currentChess[n - 1].type,
         currentChess[n - 1].position,
         piece.position,
-        currentChess[n - 1].pawnMode
+        currentChess[n - 1].pawnMode,
+        chessArray
       )
     }));
 
@@ -62,7 +63,8 @@ export default function Chess () {
         move.lastSelected.type,
         move.lastSelected.position,
         move.newSelected.position,
-        move.lastSelected.pawnMode
+        move.lastSelected.pawnMode,
+        chessArray
       )
     ) {
       currentChess[move.newSelected.position - 1].type = move.lastSelected.type
@@ -126,7 +128,7 @@ export default function Chess () {
 
       execMove();
     };
-  }, [move, execMove, checkValidPositions, cleanChessSelectedAndValidPieces]);
+  }, [move, execMove, cleanChessSelectedAndValidPieces]);
 
   console.log('render!')
 

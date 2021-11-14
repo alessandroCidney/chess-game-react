@@ -1,6 +1,13 @@
 import Pieces from '../components/Chess/pieces';
+import { ChessArrayPiece } from './generateChess';
 
-export function findValidPositions (type: string | undefined, position: number | undefined, pawnMode: string | undefined): number[] {
+
+export function findValidPositions (
+  type: string | undefined, 
+  position: number | undefined, 
+  pawnMode: string | undefined,
+  chessSnapshot: ChessArrayPiece[],
+): number[] {
   const piecesClass = new Pieces();
   let results: number[] = [];
 
@@ -10,16 +17,16 @@ export function findValidPositions (type: string | undefined, position: number |
 
   switch (type) {
     case 'rook':
-      results = piecesClass.getRook().valid(position);
+      results = piecesClass.getRook().valid(position, chessSnapshot);
       break;
     case 'knight':
       results = piecesClass.getKnight().valid(position);
       break;
     case 'bishop':
-      results = piecesClass.getBishop().valid(position);
+      results = piecesClass.getBishop().valid(position, chessSnapshot);
       break;
     case 'queen':
-      results = piecesClass.getQueen().valid(position);
+      results = piecesClass.getQueen().valid(position, chessSnapshot);
       break;
     case 'king':
       results = piecesClass.getKing().valid(position);
@@ -40,13 +47,14 @@ export function checkIfPositionIsInValidPositions (
   type: string | undefined, 
   lastPosition: number | undefined, 
   newPosition: number | undefined,
-  lastPawnMode: string | undefined
+  lastPawnMode: string | undefined,
+  chessSnapshot: ChessArrayPiece[]
 ): boolean {
   if(!type || !lastPosition || !newPosition) {
     return false;
   };
 
-  let validPositions = findValidPositions(type, lastPosition, lastPawnMode);
+  let validPositions = findValidPositions(type, lastPosition, lastPawnMode, chessSnapshot);
 
   return validPositions.includes(newPosition);
 };

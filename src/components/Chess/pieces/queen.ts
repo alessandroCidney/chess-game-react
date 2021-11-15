@@ -1,4 +1,4 @@
-import { ChessArrayPiece } from '../../../utils/generateChess';
+import { ChessArrayPiece } from '../utils/generateChess';
 import Bishop from './bishop';
 import Rook from './rook';
 

@@ -1,8 +1,8 @@
-import { findPosition } from "../../../utils/findPosition";
-import { findColumn } from "../../../utils/findColumn";
-import { findRow } from "../../../utils/findRow";
-import { ChessArrayPiece } from "../../../utils/generateChess";
-import { verifyAlreadyFilledSquare } from "../../../utils/verifyAlreadyFilledSquare";
+import { findPosition } from "../utils/findPosition";
+import { findColumn } from "../utils/findColumn";
+import { findRow } from "../utils/findRow";
+import { ChessArrayPiece } from "../utils/generateChess";
+import { verifyAlreadyFilledSquare } from "../utils/verifyAlreadyFilledSquare";
 
 export default class Rook {
   valid (position: number, chessSnapshot: ChessArrayPiece[]): number[] {

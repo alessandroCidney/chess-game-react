@@ -1,4 +1,4 @@
-import Pieces from '../components/Chess/pieces';
+import Pieces from '../pieces';
 import { ChessArrayPiece } from './generateChess';
 
 

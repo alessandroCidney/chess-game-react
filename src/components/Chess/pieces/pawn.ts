@@ -1,7 +1,7 @@
-import { findPosition } from "../../../utils/findPosition";
-import { findColumn } from "../../../utils/findColumn";
-import { findRow } from "../../../utils/findRow";
-import { cleanInvalidPieces } from "../../../utils/cleanInvalidPieces";
+import { findPosition } from "../utils/findPosition";
+import { findColumn } from "../utils/findColumn";
+import { findRow } from "../utils/findRow";
+import { cleanInvalidPieces } from "../utils/cleanInvalidPieces";
 
 export default class Pawn {
   valid (position: number, pawnMode: string): number[] {

@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import Piece from '../Piece';
+import Piece from './components/Piece';
 import { Board } from './styles';
-import { generateChess } from '../../utils/generateChess';
-import { checkIfPositionIsInValidPositions } from '../../utils/findValidPositions';
+import { generateChess } from './utils/generateChess';
+import { checkIfPositionIsInValidPositions } from './utils/findValidPositions';
 
 type PieceSelected = {
   type: string;

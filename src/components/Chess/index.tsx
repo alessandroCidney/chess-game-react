@@ -17,9 +17,39 @@ type Move = {
   newSelected?: PieceSelected;
 };
 
+type Score = {
+  whitePoints: number;
+  blackPoints: number;
+};
+
 export default function Chess () {
   const [chessArray, setChessArray] = useState(generateChess());
   const [move, setMove] = useState({} as Move);
+
+  const [score, setScore] = useState({
+    whitePoints: 0,
+    blackPoints: 0,
+  } as Score);
+
+  const analiseMove = useCallback((currentMove: Move) => {
+    if (
+      currentMove.lastSelected?.pieceColor === 'white'
+      && currentMove.newSelected?.pieceColor === 'black'
+    ) {
+      setScore((lastScore) => ({
+        whitePoints: lastScore.whitePoints + 1,
+        blackPoints: lastScore.blackPoints
+      }));
+    } else if (
+      currentMove.lastSelected?.pieceColor === 'black'
+      && currentMove.newSelected?.pieceColor === 'white'
+    ) {
+      setScore((lastScore) => ({
+        whitePoints: lastScore.whitePoints,
+        blackPoints: lastScore.blackPoints + 1
+      }));
+    };
+  }, []);
 
   const checkValidPositions = useCallback((n: number) => {
     let currentChess = chessArray;
@@ -75,12 +105,20 @@ export default function Chess () {
       currentChess[move.lastSelected.position - 1].pieceColor = undefined;
       currentChess[move.lastSelected.position - 1].pawnMode = undefined;
 
+      analiseMove(move);
+
       let newChess = currentChess.map(obj => ({ ...obj }));
       setChessArray(newChess);
       setMove({});
       cleanChessSelectedAndValidPieces();
     };
-  }, [chessArray, move.lastSelected, move.newSelected, cleanChessSelectedAndValidPieces]);
+  },
+  [
+    chessArray,
+    cleanChessSelectedAndValidPieces,
+    move,
+    analiseMove
+  ]);
 
   function selectPiece (pos: number, type: string) {
     if (!move.lastSelected && type === 'empty') {
@@ -129,6 +167,10 @@ export default function Chess () {
       execMove();
     };
   }, [move, execMove, cleanChessSelectedAndValidPieces]);
+
+  useEffect(() => {
+    console.log(score);
+  }, [score]);
 
   console.log('render!')
 

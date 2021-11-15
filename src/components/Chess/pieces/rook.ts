@@ -2,6 +2,7 @@ import { findPosition } from "../../../utils/findPosition";
 import { findColumn } from "../../../utils/findColumn";
 import { findRow } from "../../../utils/findRow";
 import { ChessArrayPiece } from "../../../utils/generateChess";
+import { verifyAlreadyFilledSquare } from "../../../utils/verifyAlreadyFilledSquare";
 
 export default class Rook {
   valid (position: number, chessSnapshot: ChessArrayPiece[]): number[] {
@@ -13,17 +14,20 @@ export default class Rook {
 
     let currentRow = row;
     let currentColumn = column;
-    let temporaryPiece: ChessArrayPiece | undefined;
 
     while (currentRow !== 1) {
         currentRow -= 1;
 
-        // eslint-disable-next-line no-loop-func
-        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
-        
-        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+        if (
+          currentPiece 
+          && verifyAlreadyFilledSquare(
+              chessSnapshot,
+              currentRow,
+              currentColumn,
+              currentPiece
+        )) {
           break;
-        };
+        }
 
         valids.push([currentRow, currentColumn]);
     };
@@ -33,12 +37,16 @@ export default class Rook {
     while (currentRow !== 8) {
         currentRow += 1;
 
-        // eslint-disable-next-line no-loop-func
-        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
-        
-        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+        if (
+          currentPiece 
+          && verifyAlreadyFilledSquare(
+              chessSnapshot,
+              currentRow,
+              currentColumn,
+              currentPiece
+        )) {
           break;
-        };
+        }
 
         valids.push([currentRow, currentColumn]);
     };
@@ -48,12 +56,16 @@ export default class Rook {
     while (currentColumn !== 1) {
         currentColumn -= 1;
 
-        // eslint-disable-next-line no-loop-func
-        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
-        
-        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+        if (
+          currentPiece 
+          && verifyAlreadyFilledSquare(
+              chessSnapshot,
+              currentRow,
+              currentColumn,
+              currentPiece
+        )) {
           break;
-        };
+        }
 
         valids.push([currentRow, currentColumn]);
     };
@@ -63,12 +75,16 @@ export default class Rook {
     while (currentColumn !== 8) {
         currentColumn += 1;
 
-        // eslint-disable-next-line no-loop-func
-        temporaryPiece = chessSnapshot.find(piece => piece.position === findPosition(currentRow, currentColumn))
-        
-        if (currentPiece?.pieceColor === temporaryPiece?.pieceColor) {
+        if (
+          currentPiece 
+          && verifyAlreadyFilledSquare(
+              chessSnapshot,
+              currentRow,
+              currentColumn,
+              currentPiece
+        )) {
           break;
-        };
+        }
 
         valids.push([currentRow, currentColumn]);
     };

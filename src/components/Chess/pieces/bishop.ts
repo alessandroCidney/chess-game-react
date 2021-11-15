@@ -25,7 +25,9 @@ export default class Bishop {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow + 1,
+              currentColumn - 1
         )) {
           break;
         }
@@ -46,7 +48,9 @@ export default class Bishop {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow - 1,
+              currentColumn + 1
         )) {
           break;
         }
@@ -67,7 +71,9 @@ export default class Bishop {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow - 1,
+              currentColumn - 1
         )) {
           break;
         }
@@ -88,7 +94,9 @@ export default class Bishop {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow + 1,
+              currentColumn + 1
         )) {
           break;
         }

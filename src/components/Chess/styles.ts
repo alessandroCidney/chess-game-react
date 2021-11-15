@@ -6,12 +6,13 @@ interface BoardProps {
 
 export const Board = styled.div<BoardProps>`
   width: 100%;
+  max-width: ${props => props.size ? `${props.size}px` : '300px'};
   height: 0;
-  padding-bottom: 100%;
+  padding-bottom: min(100%, ${props => props.size ? `${props.size}px` : '300px'});
 
   position: relative;
 
-  div {
+  div.wrapper {
     position: absolute;
 
     border: 1px solid #CECECE;

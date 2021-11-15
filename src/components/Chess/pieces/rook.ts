@@ -24,7 +24,9 @@ export default class Rook {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow + 1,
+              currentColumn
         )) {
           break;
         }
@@ -43,7 +45,9 @@ export default class Rook {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow - 1,
+              currentColumn
         )) {
           break;
         }
@@ -62,7 +66,9 @@ export default class Rook {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow,
+              currentColumn + 1
         )) {
           break;
         }
@@ -81,7 +87,9 @@ export default class Rook {
               chessSnapshot,
               currentRow,
               currentColumn,
-              currentPiece
+              currentPiece,
+              currentRow,
+              currentColumn - 1
         )) {
           break;
         }

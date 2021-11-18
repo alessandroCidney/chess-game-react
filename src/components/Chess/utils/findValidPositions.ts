@@ -33,7 +33,7 @@ export function findValidPositions (
       break;
     case 'pawn':
       if (pawnMode) {
-        results = piecesClass.getPawn().valid(position, pawnMode);
+        results = piecesClass.getPawn().valid(position, pawnMode, chessSnapshot);
       };
       break;
     default:

@@ -24,6 +24,8 @@ export const StyledPieceSquare = styled.button<StyledPieceSquareProps>`
 
   font-size: 2.9rem;
 
+  transition: .2s;
+
   ${props => props.pieceColor && `color: ${props.pieceColor};`}
 
   ${props => props.selected && 'filter: brightness(1.5);'}

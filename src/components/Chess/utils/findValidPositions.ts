@@ -20,7 +20,7 @@ export function findValidPositions (
       results = piecesClass.getRook().valid(position, chessSnapshot);
       break;
     case 'knight':
-      results = piecesClass.getKnight().valid(position);
+      results = piecesClass.getKnight().valid(position, chessSnapshot);
       break;
     case 'bishop':
       results = piecesClass.getBishop().valid(position, chessSnapshot);
